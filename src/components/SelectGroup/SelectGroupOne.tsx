@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 
 type TypeSelectGroupOne = {
-  title: string;
-  data: any[];
+  title?: string;
+  data?: any[];
   onChange?: (value: any) => void;
   defaultValue?: string;
 };
