@@ -21,7 +21,9 @@ export const useSettingHooks = () => {
     const data = await response.json();
 
     if (response.status === 200) {
-      localStorage.setItem("user", JSON.stringify(data.data));
+      typeof window !== "undefined"
+        ? localStorage.setItem("user", JSON.stringify(data.data))
+        : null;
       setName(data.data.name);
       setEmail(data.data.email);
       setPhoneNumber(data.data.phone_number);
@@ -56,7 +58,9 @@ export const useSettingHooks = () => {
     const data = await response.json();
 
     if (response.status === 200) {
-      localStorage.setItem("user", JSON.stringify(data.data));
+      typeof window !== "undefined"
+        ? localStorage.setItem("user", JSON.stringify(data.data))
+        : null;
       window.location.reload();
     } else {
       setLoading(false);
@@ -67,10 +71,6 @@ export const useSettingHooks = () => {
     const response = await fetch("/images/user/user.png");
     const blob = await response.blob();
     return new File([blob], "user.png", { type: "image/png" });
-  };
-
-  const handleUpdateHeader = (data: any) => {
-    localStorage;
   };
 
   return {

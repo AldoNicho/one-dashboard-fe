@@ -12,11 +12,15 @@ const DropdownUser = () => {
   const dropdown = useRef<any>(null);
 
   const username =
-    (localStorage.getItem("user") as string) &&
-    JSON.parse(localStorage.getItem("user") as string).name;
+    typeof window !== "undefined"
+      ? (localStorage.getItem("user") as string) &&
+        JSON.parse(localStorage.getItem("user") as string).name
+      : null;
   const avatar =
-    (localStorage.getItem("user") as string) &&
-    JSON.parse(localStorage.getItem("user") as string).avatar;
+    typeof window !== "undefined"
+      ? (localStorage.getItem("user") as string) &&
+        JSON.parse(localStorage.getItem("user") as string).avatar
+      : null;
 
   // close on click outside
   useEffect(() => {
@@ -51,8 +55,8 @@ const DropdownUser = () => {
 
     if (response.status === 200) {
       const data = await response.json();
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      typeof window !== "undefined" ? localStorage.removeItem("token") : null;
+      typeof window !== "undefined" ? localStorage.removeItem("user") : null;
       router.replace("/auth/signin");
     } else {
       const data = await response.json();

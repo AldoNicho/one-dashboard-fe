@@ -17,8 +17,12 @@ export const useSigninHook = () => {
 
     if (response.status === 200) {
       const data = await response.json();
-      localStorage.setItem("token", data.data.token);
-      localStorage.setItem("user", JSON.stringify(data.data.user));
+      typeof window !== "undefined"
+        ? localStorage.setItem("token", data.data.token)
+        : null;
+      typeof window !== "undefined"
+        ? localStorage.setItem("user", JSON.stringify(data.data.user))
+        : null;
       setErrorMessage("");
       setLoading(false);
       window.location.href = "/";
