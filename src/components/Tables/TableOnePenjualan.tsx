@@ -2,12 +2,12 @@ import { useTableOnePenjualanHooks } from "@/hooks/componentHooks/useTableOnePen
 import Image from "next/image";
 
 export type TypeChartOne = {
-  title: string;
+  title?: string;
   data?: any[];
-  onInput: (data: any) => void;
-  onRemove: (index: number) => void;
-  onIncrease: (id: string) => void;
-  onDecrease: (id: string) => void;
+  onInput?: (data: any) => void;
+  onRemove?: (index: number) => void;
+  onIncrease?: (id: string) => void;
+  onDecrease?: (id: string) => void;
 };
 
 const TableOnePenjualan = ({

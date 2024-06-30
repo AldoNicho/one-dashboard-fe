@@ -1,7 +1,7 @@
 import React from "react";
 
 type TypeConfirmationModal = {
-  message: string;
+  message?: string;
   cancelText?: string;
   confirmText?: string;
   onConfirm: () => void;

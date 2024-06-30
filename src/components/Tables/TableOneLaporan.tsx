@@ -3,9 +3,9 @@ import { formatDate } from "@/utils/dateFormater";
 import Image from "next/image";
 
 export type TypeChartOne = {
-  title: string;
-  data: any[];
-  onShowDetail: (id: string) => void;
+  title?: string;
+  data?: any[];
+  onShowDetail?: (id: string) => void;
 };
 
 const TableOneLaporan = ({

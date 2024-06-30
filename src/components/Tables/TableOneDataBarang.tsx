@@ -46,8 +46,8 @@ const brandData: BRAND[] = [
 ];
 
 export type TypeChartOne = {
-  data: any[];
-  title: string;
+  data?: any[];
+  title?: string;
   keyword?: string;
   onSearch?: () => void;
   onChangeSearch?: (e: any) => void;

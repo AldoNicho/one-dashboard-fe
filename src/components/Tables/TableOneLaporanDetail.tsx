@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export type TypeChartOne = {
   title?: string;
-  data: any[];
+  data?: any[];
 };
 
 const TableOneLaporanDetail = ({ title = "", data = [] }: TypeChartOne) => {

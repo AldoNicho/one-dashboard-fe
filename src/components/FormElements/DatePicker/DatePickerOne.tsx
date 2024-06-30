@@ -6,7 +6,7 @@ type TypeDatePickerOne = {
   label?: string;
   value?: string;
   onChange?: (e: string) => void;
-  uniqueId: string; // Add uniqueId prop
+  uniqueId?: string; // Add uniqueId prop
 };
 
 const DatePickerOne = ({
