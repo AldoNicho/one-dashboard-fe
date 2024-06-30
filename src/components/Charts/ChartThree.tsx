@@ -7,7 +7,7 @@ interface ChartThreeState {
 }
 
 type TypeChartThree = {
-  data: any;
+  data?: any;
 };
 
 const ChartThree = ({ data }: TypeChartThree) => {

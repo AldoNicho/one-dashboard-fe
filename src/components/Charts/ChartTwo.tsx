@@ -10,9 +10,9 @@ export type ChartTwoState = {
 };
 
 type TypeChartTwo = {
-  ydata: any[];
-  xdata: any[];
-  title: string;
+  ydata?: any[];
+  xdata?: any[];
+  title?: string;
 };
 
 const ChartTwo = ({ ydata = [], xdata = [], title }: TypeChartTwo) => {
