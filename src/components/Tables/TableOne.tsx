@@ -45,8 +45,8 @@ const brandData: BRAND[] = [
 ];
 
 export type TypeChartOne = {
-  title: string;
-  data: any[];
+  title?: string;
+  data?: any[];
 };
 
 const TableOne = ({ title, data = [] }: TypeChartOne) => {
