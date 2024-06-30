@@ -48,7 +48,9 @@ const DropdownUser = () => {
     return () => document.removeEventListener("keydown", keyHandler);
   });
 
-  useEffect(() => {}, [localStorage.getItem("user")]);
+  useEffect(() => {}, [
+    typeof window !== "undefined" ? localStorage.getItem("user") : null,
+  ]);
 
   const handleSignOut = async () => {
     const response = await apiAuthSignout();
