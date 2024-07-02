@@ -6,4 +6,5 @@ export const HEADER_AUTH = {
 
 export const HEADER_AUTH_JSON = {
   Authorization: `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") : ""}`,
+  "Content-Type": "application/json",
 };

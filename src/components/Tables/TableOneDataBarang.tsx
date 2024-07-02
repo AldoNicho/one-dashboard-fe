@@ -145,7 +145,7 @@ const TableOneDataBarang = ({
 
               <div className="flex items-center justify-center p-2.5 xl:p-5">
                 <p className="text-center text-black dark:text-white">
-                  {data.category.name}
+                  {data.category?.name}
                 </p>
               </div>
 
