@@ -97,7 +97,7 @@ const TableOne = ({ title, data = [] }: TypeChartOne) => {
                   />
                 </div>
                 <p className="hidden text-black dark:text-white sm:block">
-                  {data.product.name}
+                  {data.product?.name}
                 </p>
               </div>
 
