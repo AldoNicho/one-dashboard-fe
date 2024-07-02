@@ -2,7 +2,7 @@
 
 const nextConfig = {
   images: {
-    domains: ["https://one-dashboard-be-784b7694ba8f.herokuapp.com"],
+    domains: ["one-dashboard-be-784b7694ba8f.herokuapp.com"],
   },
   async rewrites() {
     return [
