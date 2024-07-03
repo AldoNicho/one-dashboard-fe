@@ -4,8 +4,8 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import useAuth from "@/hooks/useAuth";
 
 export const metadata: Metadata = {
-  title: "One Admin",
-  description: "One Admin Dashboard",
+  title: "Toko Dewi",
+  description: "Toko Dewi",
 };
 
 export default function Home() {

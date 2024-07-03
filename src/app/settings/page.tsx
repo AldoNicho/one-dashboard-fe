@@ -6,9 +6,8 @@ import { useSettingHooks } from "@/hooks/pageHooks/useSettingHooks";
 import ContentSettings from "@/components/Settings";
 
 export const metadata: Metadata = {
-  title: "Next.js Settings | TailAdmin - Next.js Dashboard Template",
-  description:
-    "This is Next.js Settings page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template",
+  title: "Toko Dewi",
+  description: "Toko Dewi",
 };
 
 const Settings = () => {

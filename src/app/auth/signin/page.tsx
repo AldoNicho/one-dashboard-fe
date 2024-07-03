@@ -5,8 +5,8 @@ import SigninContent from "./content";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "One Admin | Login",
-  description: "One Admin Halaman Login",
+  title: "Toko Dewi",
+  description: "Toko Dewi",
 };
 
 const SignIn = () => {
