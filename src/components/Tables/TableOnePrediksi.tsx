@@ -130,13 +130,16 @@ const TableOnePrediksi = ({ title, data = [] }: TypeChartOne) => {
                       className="flex flex-row items-center gap-1"
                     >
                       <p>{sold.sold}</p>
-                      {index !== 0 && (
-                        <p
-                          className={`${sold.increase_sold_percentage > 0 ? "text-green-500" : "text-rose-500"} text-xs`}
-                        >
-                          {Math.abs(sold.increase_sold_percentage.toFixed(2))}%
-                        </p>
-                      )}
+                      {index !== 0 &&
+                        sold.increase_sold_percentage !== null &&
+                        sold.increase_sold_percentage !== 0 && (
+                          <p
+                            className={`${sold.increase_sold_percentage > 0 ? "text-green-500" : "text-rose-500"} text-xs`}
+                          >
+                            {Math.abs(sold.increase_sold_percentage.toFixed(2))}
+                            %
+                          </p>
+                        )}
                       {index !== data.sold_summary.length - 1 ? (
                         <Image
                           src={"/images/icon/icon-arrow-right.svg"}
