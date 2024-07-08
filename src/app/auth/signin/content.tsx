@@ -136,13 +136,15 @@ const SigninContent = () => {
                 </div>
               )}
 
-              <div className="mb-5">
-                <input
-                  type="submit"
-                  value="Masuk"
-                  onClick={handleSignIn}
-                  className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-                />
+              <div
+                className="flex w-full cursor-pointer flex-row justify-center gap-2 rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+                onClick={handleSignIn}
+                disabled={loading}
+              >
+                <span>{`${loading ? "Loading..." : "Masuk"}`}</span>
+                {loading ? (
+                  <div className="h-4 w-4 animate-spin rounded-full border-4 border-solid border-yellow-50 border-t-transparent"></div>
+                ) : null}
               </div>
             </div>
           </div>
