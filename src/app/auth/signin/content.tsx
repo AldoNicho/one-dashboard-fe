@@ -139,7 +139,6 @@ const SigninContent = () => {
               <div
                 className="flex w-full cursor-pointer flex-row justify-center gap-2 rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                 onClick={handleSignIn}
-                disabled={loading}
               >
                 <span>{`${loading ? "Loading..." : "Masuk"}`}</span>
                 {loading ? (
