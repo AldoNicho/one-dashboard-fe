@@ -22,6 +22,7 @@ export const useDatangBarangHook = () => {
   const [id, setId] = useState("");
 
   useEffect(() => {
+    setLoading(true);
     handleGetProduct();
   }, [page]);
 

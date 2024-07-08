@@ -12,6 +12,7 @@ export const usePrediksiHooks = () => {
   const [totalPrediction, setTotalPrediction] = useState(0);
 
   useEffect(() => {
+    setLoading(true);
     handleGetPrediction();
   }, [page]);
 

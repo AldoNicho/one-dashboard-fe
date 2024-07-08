@@ -11,6 +11,7 @@ export const useSigninHook = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSignIn = async (event: any) => {
+    setLoading(true);
     event.preventDefault();
 
     const response = await apiAuthSignin(email, password);

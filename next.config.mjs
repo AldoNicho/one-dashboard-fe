@@ -2,14 +2,14 @@
 
 const nextConfig = {
   images: {
-    domains: ["one-dashboard-be-784b7694ba8f.herokuapp.com"],
+    domains: ["my-one-dashboard-be-4a28e29e76c3.herokuapp.com"],
   },
   async rewrites() {
     return [
       {
         source: "/api/:path*",
         destination:
-          "https://one-dashboard-be-784b7694ba8f.herokuapp.com/:path*",
+          "https://my-one-dashboard-be-4a28e29e76c3.herokuapp.com/:path*",
       },
     ];
   },

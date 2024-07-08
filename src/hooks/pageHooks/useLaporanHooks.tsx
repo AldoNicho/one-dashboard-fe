@@ -45,6 +45,7 @@ export const useLaporanHooks = () => {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     handleGetTransaction();
   }, [page, startDate, endDate]);
 
