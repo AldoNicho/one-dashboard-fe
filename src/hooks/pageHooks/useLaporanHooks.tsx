@@ -1,9 +1,11 @@
 import { getTransactionDetail, getTransactions } from "@/api/transaction";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useLogout } from "../useLogout";
 
 export const useLaporanHooks = () => {
   const router = useRouter();
+  const { handleLogout } = useLogout();
   const [loading, setLoading] = useState(true);
   const [category_id, setCategory_id] = useState("");
   const [code, setCode] = useState("");
@@ -72,7 +74,10 @@ export const useLaporanHooks = () => {
 
     const response = await getTransactions(params);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setTransaction(data.data);
       setTotalPage(data.pagination.total_page);

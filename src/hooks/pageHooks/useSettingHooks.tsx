@@ -1,8 +1,10 @@
 import { gerProfile, updateProfile } from "@/api/profile";
 import { useEffect, useState } from "react";
 import { fixUrl } from "@/utils/urlFixer";
+import { useLogout } from "../useLogout";
 
 export const useSettingHooks = () => {
+  const { handleLogout } = useLogout();
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +22,10 @@ export const useSettingHooks = () => {
     const response = await gerProfile();
     const data = await response.json();
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       typeof window !== "undefined"
         ? localStorage.setItem("user", JSON.stringify(data.data))
         : null;
@@ -57,7 +62,10 @@ export const useSettingHooks = () => {
     const response = await updateProfile(params);
     const data = await response.json();
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       typeof window !== "undefined"
         ? localStorage.setItem("user", JSON.stringify(data.data))
         : null;

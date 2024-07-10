@@ -1,8 +1,10 @@
+import { useLogout } from "../useLogout";
 import { getProduct } from "@/api/product";
 import { useEffect, useRef, useState } from "react";
 
 export const useTableOnePenjualanHooks = () => {
   const timeoutId = useRef<any>(null);
+  const { handleLogout } = useLogout();
   const [search, setSearch] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [products, setProducts] = useState<any[]>([]);
@@ -50,7 +52,10 @@ export const useTableOnePenjualanHooks = () => {
 
     timeoutId.current = setTimeout(async () => {
       const response = await getProduct({ name: search });
-      if (response.status === 200) {
+      if (response.status === 401) {
+        setLoading(false);
+        handleLogout();
+      } else if (response.status === 200) {
         const data = await response.json();
         setProducts(data.data);
         console.log(data.data);

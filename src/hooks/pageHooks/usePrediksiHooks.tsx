@@ -1,7 +1,9 @@
 import { getPredictions } from "@/api/prediction";
 import { use, useEffect, useState } from "react";
+import { useLogout } from "../useLogout";
 
 export const usePrediksiHooks = () => {
+  const { handleLogout } = useLogout();
   const [loading, setLoading] = useState(true);
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
@@ -32,7 +34,10 @@ export const usePrediksiHooks = () => {
 
     const response = await getPredictions(params);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setTotalPage(data.data.pagination.total_page);
       setPrediction(data.data.products_summary);

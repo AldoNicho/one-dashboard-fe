@@ -3,9 +3,11 @@ import {
   apiMostSoldProduct,
   apiSalesSummary,
 } from "@/api/dashboard";
+import { useLogout } from "../useLogout";
 import { useEffect, useState } from "react";
 
 export const useDashboardHooks = () => {
+  const { handleLogout } = useLogout();
   const [loadingSummary, setLoadingSummary] = useState(true);
   const [loadingSoldProduct, setLoadingSoldProduct] = useState(true);
   const [loadingSoldCategory, setLoadingSoldCategory] = useState(true);
@@ -45,7 +47,9 @@ export const useDashboardHooks = () => {
   const handleGetSalesSummary = async () => {
     const response = await apiSalesSummary(startDate, endDate);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       const sales = data.data.map((item: any) => item.total_quantity);
       const salesDates = data.data.map((item: any) =>
@@ -68,7 +72,9 @@ export const useDashboardHooks = () => {
   const handleGetMostSoldProduct = async () => {
     const response = await apiMostSoldProduct(startDate, endDate);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setProducts(data.data);
       setLoadingSoldProduct(false);
@@ -81,7 +87,9 @@ export const useDashboardHooks = () => {
   const handleGetMostSoldCategory = async () => {
     const response = await apiMostSoldCategory(startDate, endDate);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setCategories(data.data.items);
       setLoadingSoldCategory(false);

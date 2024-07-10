@@ -3,9 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { apiAuthSignout } from "@/api/auth";
 import { useRouter } from "next/navigation";
+import { useLogout } from "@/hooks/useLogout";
 
 const DropdownUser = () => {
   const router = useRouter();
+  const { handleLogout } = useLogout();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef<any>(null);
@@ -55,7 +57,9 @@ const DropdownUser = () => {
   const handleSignOut = async () => {
     const response = await apiAuthSignout();
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       typeof window !== "undefined" ? localStorage.removeItem("token") : null;
       typeof window !== "undefined" ? localStorage.removeItem("user") : null;
