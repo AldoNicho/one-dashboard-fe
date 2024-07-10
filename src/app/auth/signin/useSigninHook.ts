@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLogout } from "@/hooks/useLogout";
 import { apiAuthSignin } from "@/api/auth";
 
 export const useSigninHook = () => {
   const router = useRouter();
+  const { handleLogout } = useLogout();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
@@ -16,7 +18,10 @@ export const useSigninHook = () => {
 
     const response = await apiAuthSignin(email, password);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       typeof window !== "undefined"
         ? localStorage.setItem("token", data.data.token)
@@ -26,7 +31,7 @@ export const useSigninHook = () => {
         : null;
       setErrorMessage("");
       setLoading(false);
-      window.location.href = "/";
+      // window.location.href = "/";
     } else {
       const data = await response.json();
       console.error(data);

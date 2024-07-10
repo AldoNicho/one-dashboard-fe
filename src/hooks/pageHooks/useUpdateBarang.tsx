@@ -7,8 +7,10 @@ import {
 } from "@/api/product";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { useLogout } from "../useLogout";
 
 export const useUpdateBarangHooks = () => {
+  const { handleLogout } = useLogout();
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
@@ -33,7 +35,10 @@ export const useUpdateBarangHooks = () => {
   const handleGetCategory = async () => {
     const response = await getCategories();
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setCategories(data.data);
       setLoading(false);
@@ -46,7 +51,10 @@ export const useUpdateBarangHooks = () => {
     setLoading(true);
     const response = await getProductById(id);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setName(data.data.name);
       setCode(data.data.code);
@@ -91,7 +99,10 @@ export const useUpdateBarangHooks = () => {
     const response = await updateProduct(id, newProduct);
     const data = await response.json();
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       setLoading(false);
       setModalMessage("Barang berhasil diubah!");
       showModal();

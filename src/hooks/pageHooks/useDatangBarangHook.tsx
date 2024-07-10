@@ -1,9 +1,11 @@
 import { deleteProduct, getProduct } from "@/api/product";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLogout } from "../useLogout";
 
 export const useDatangBarangHook = () => {
   const router = useRouter();
+  const { handleLogout } = useLogout();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [category_id, setCategory_id] = useState("");
@@ -42,7 +44,10 @@ export const useDatangBarangHook = () => {
 
     const response = await getProduct(params);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setProduct(data.data);
       setTotalPage(data.pagination.total_page);
@@ -63,7 +68,10 @@ export const useDatangBarangHook = () => {
   const handleDeleteProduct = async () => {
     setLoading(true);
     const response = await deleteProduct(id);
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       handleGetProduct();
     } else {
       setLoading(false);

@@ -5,10 +5,12 @@ import {
   updateCategory,
 } from "@/api/category";
 import { useEffect, useState } from "react";
+import { useLogout } from "../useLogout";
 
 type Action = "create" | "update" | "delete" | "";
 
 export const useKategoriHooks = () => {
+  const { handleLogout } = useLogout();
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<any[]>([]);
   const [showModal, setShowModal] = useState(false);
@@ -29,7 +31,10 @@ export const useKategoriHooks = () => {
     try {
       const response = await getCategories();
 
-      if (response.status === 200) {
+      if (response.status === 401) {
+        setLoading(false);
+        handleLogout();
+      } else if (response.status === 200) {
         const data = await response.json();
         setCategories(data.data);
         setLoading(false);
@@ -49,7 +54,10 @@ export const useKategoriHooks = () => {
       setLoading(true);
       const response = await deleteCategory(productId);
 
-      if (response.status === 200) {
+      if (response.status === 401) {
+        setLoading(false);
+        handleLogout();
+      } else if (response.status === 200) {
         handleGetCategories();
       } else {
         setLoading(false);
@@ -91,7 +99,10 @@ export const useKategoriHooks = () => {
       setLoading(true);
       const response = await updateCategory(productId, name, description);
 
-      if (response.status === 200) {
+      if (response.status === 401) {
+        setLoading(false);
+        handleLogout();
+      } else if (response.status === 200) {
         handleGetCategories();
       } else {
         setLoading(false);

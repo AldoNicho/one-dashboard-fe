@@ -2,8 +2,10 @@ import { createProduct, getProductById } from "@/api/product";
 import { useEffect, useState } from "react";
 import { getCategories } from "@/api/category";
 import { useParams } from "next/navigation";
+import { useLogout } from "../useLogout";
 
 export const useTambahBarangHooks = () => {
+  const { handleLogout } = useLogout();
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
@@ -27,7 +29,10 @@ export const useTambahBarangHooks = () => {
   const handleGetCategory = async () => {
     const response = await getCategories();
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setCategories(data.data);
       setLoading(false);
@@ -40,7 +45,10 @@ export const useTambahBarangHooks = () => {
     setLoading(true);
     const response = await getProductById(id);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setName(data.name);
       setCode(data.code);

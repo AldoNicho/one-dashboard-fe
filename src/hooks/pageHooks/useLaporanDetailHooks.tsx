@@ -1,8 +1,10 @@
 import { getTransactionDetail } from "@/api/transaction";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { useLogout } from "../useLogout";
 
 export const useLaporanDetailHooks = () => {
+  const { handleLogout } = useLogout();
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<any[]>([]);
@@ -20,7 +22,10 @@ export const useLaporanDetailHooks = () => {
   const handleGetDetailTransaction = async (id: string) => {
     const response = await getTransactionDetail(id);
 
-    if (response.status === 200) {
+    if (response.status === 401) {
+      setLoading(false);
+      handleLogout();
+    } else if (response.status === 200) {
       const data = await response.json();
       setProducts(data.data.items);
       setTotal(data.data.total_price);
