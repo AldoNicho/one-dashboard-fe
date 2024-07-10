@@ -31,7 +31,7 @@ export const useSigninHook = () => {
         : null;
       setErrorMessage("");
       setLoading(false);
-      // window.location.href = "/";
+      window.location.href = "/";
     } else {
       const data = await response.json();
       console.error(data);
