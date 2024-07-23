@@ -1,6 +1,7 @@
 import {
   apiMostSoldCategory,
   apiMostSoldProduct,
+  apiSalesProfit,
   apiSalesSummary,
 } from "@/api/dashboard";
 import { useLogout } from "../useLogout";
@@ -11,8 +12,12 @@ export const useDashboardHooks = () => {
   const [loadingSummary, setLoadingSummary] = useState(true);
   const [loadingSoldProduct, setLoadingSoldProduct] = useState(true);
   const [loadingSoldCategory, setLoadingSoldCategory] = useState(true);
+  const [loadingProfitToday, setLoadingProfitToday] = useState(true);
+  const [loadingProfitTotal, setLoadingProfitTotal] = useState(true);
   const [sales, setSales] = useState([]);
   const [salesDates, setSalesDates] = useState([]);
+  const [salesProfitToday, setSalesProfitToday] = useState(0);
+  const [salesProfitTotal, setSalesProfitTotal] = useState(0);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [startDate, setStartDate] = useState("");
@@ -41,6 +46,8 @@ export const useDashboardHooks = () => {
       handleGetSalesSummary();
       handleGetMostSoldProduct();
       handleGetMostSoldCategory();
+      handleGetSalesProfitToday();
+      handleGetSalesProfitTotal();
     }
   }, [startDate, endDate]);
 
@@ -99,6 +106,41 @@ export const useDashboardHooks = () => {
     }
   };
 
+  const handleGetSalesProfitToday = async () => {
+    const today = new Date();
+
+    const startDate = today.toISOString().split("T")[0];
+    const endDate = startDate;
+
+    const response = await apiSalesProfit(startDate, endDate);
+
+    if (response.status === 401) {
+      handleLogout();
+    } else if (response.status === 200) {
+      const data = await response.json();
+      setSalesProfitToday(data.data.sum_profit);
+      setLoadingProfitToday(false);
+    } else {
+      setLoadingProfitToday(false);
+      console.error("Failed to fetch sales summary");
+    }
+  };
+
+  const handleGetSalesProfitTotal = async () => {
+    const response = await apiSalesProfit(startDate, endDate);
+
+    if (response.status === 401) {
+      handleLogout();
+    } else if (response.status === 200) {
+      const data = await response.json();
+      setSalesProfitTotal(data.data.sum_profit);
+      setLoadingProfitTotal(false);
+    } else {
+      setLoadingProfitTotal(false);
+      console.error("Failed to fetch sales summary");
+    }
+  };
+
   const handleStartDate = (date: string) => {
     setLoadingSummary(true);
     setStartDate(date);
@@ -117,6 +159,10 @@ export const useDashboardHooks = () => {
     salesDates,
     categories,
     loadingSummary,
+    salesProfitToday,
+    salesProfitTotal,
+    loadingProfitToday,
+    loadingProfitTotal,
     loadingSoldProduct,
     loadingSoldCategory,
     handleEndDate,

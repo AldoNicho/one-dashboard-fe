@@ -42,6 +42,7 @@ export const createProduct = async (data: any) => {
   formData.append("quantity", data.quantity);
   formData.append("description", data.description);
   formData.append("category_id", data.category_id);
+  formData.append("original_price", data.original_price);
 
   const url = `${BASE_URL}${PREFIX}/products`;
   const response = fetch(url, {
@@ -61,6 +62,7 @@ export const updateProduct = async (id: string, data: any) => {
   formData.append("quantity", data.quantity);
   formData.append("description", data.description);
   formData.append("category_id", data.category_id);
+  formData.append("original_price", data.original_price);
 
   const url = `${BASE_URL}${PREFIX}/products/${id}`;
   const response = fetch(url, {

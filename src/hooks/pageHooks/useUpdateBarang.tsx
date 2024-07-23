@@ -18,6 +18,7 @@ export const useUpdateBarangHooks = () => {
   const [categoryLabel, setCategoryLabel] = useState("");
   const [code, setCode] = useState("");
   const [price, setPrice] = useState(0);
+  const [originalPrice, setOriginalPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<any>("");
@@ -61,6 +62,7 @@ export const useUpdateBarangHooks = () => {
       setPrice(data.data.price);
       setQuantity(data.data.quantity);
       setDescription(data.data.description);
+      setOriginalPrice(data.data.original_price);
       setCategory(data.data.category.id);
       setCategoryLabel(data.data.category.name);
       setLoading(false);
@@ -80,6 +82,7 @@ export const useUpdateBarangHooks = () => {
       quantity,
       description,
       category_id: category,
+      original_price: originalPrice,
     };
 
     if (!quantity) {
@@ -89,7 +92,14 @@ export const useUpdateBarangHooks = () => {
       return;
     }
 
-    if (!name || !code || !price || !description || !category) {
+    if (
+      !name ||
+      !code ||
+      !price ||
+      !description ||
+      !originalPrice ||
+      !category
+    ) {
       setModalMessage("Pastikan semua data terisi!");
       showModal();
       setLoading(false);
@@ -136,6 +146,13 @@ export const useUpdateBarangHooks = () => {
     setPrice(Number(value));
   };
 
+  const handleSetOriginalPrice = (value: string) => {
+    if (isNaN(Number(value))) {
+      return;
+    }
+    setOriginalPrice(Number(value));
+  };
+
   const handleSetQuantity = (value: string) => {
     if (isNaN(Number(value))) {
       return;
@@ -157,6 +174,7 @@ export const useUpdateBarangHooks = () => {
     isModalOpen,
     modalMessage,
     categoryLabel,
+    originalPrice,
     setName,
     setCode,
     setImage,
@@ -170,5 +188,6 @@ export const useUpdateBarangHooks = () => {
     setModalMessage,
     handleSetQuantity,
     handleUpdateProduct,
+    handleSetOriginalPrice,
   };
 };

@@ -38,3 +38,14 @@ export const apiMostSoldCategory = async (
   );
   return response;
 };
+
+export const apiSalesProfit = async (start_date: string, end_date: string) => {
+  const response = fetch(
+    `${BASE_URL}${PREFIX}/dashboard/sales-profit?start_date=${start_date}&end_date=${end_date}`,
+    {
+      method: "GET",
+      headers: HEADER_AUTH,
+    },
+  );
+  return response;
+};

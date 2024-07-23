@@ -20,6 +20,7 @@ const UpdateBarang = () => {
     isModalOpen,
     modalMessage,
     categoryLabel,
+    originalPrice,
     setName,
     setCode,
     setImage,
@@ -33,6 +34,7 @@ const UpdateBarang = () => {
     setModalMessage,
     handleSetQuantity,
     handleUpdateProduct,
+    handleSetOriginalPrice,
   } = useUpdateBarangHooks();
 
   return (
@@ -89,11 +91,11 @@ const UpdateBarang = () => {
                   <div className="flex flex-row gap-4">
                     <div className="flex-1">
                       <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                        Harga
+                        Harga Jual
                       </label>
                       <input
                         type="text"
-                        placeholder="Masukkan Harga Barang"
+                        placeholder="Masukkan Harga Jual"
                         value={price}
                         onChange={(e) => handleSetPrice(e.target.value)}
                         className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -111,6 +113,24 @@ const UpdateBarang = () => {
                         className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       />
                     </div>
+                  </div>
+
+                  <div className="flex-1">
+                    <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+                      Harga Kulak
+                    </label>
+                    <input
+                      type="text"
+                      value={originalPrice || ""}
+                      placeholder="Masukkan Harga Kulak"
+                      onChange={(e) => handleSetOriginalPrice(e.target.value)}
+                      className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      style={{
+                        appearance: "textfield", // For Edge
+                        MozAppearance: "textfield", // For Firefox
+                        WebkitAppearance: "none", // For Chrome, Safari, etc.
+                      }}
+                    />
                   </div>
 
                   <div>
