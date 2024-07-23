@@ -12,6 +12,7 @@ export const useTambahBarangHooks = () => {
   const [category, setCategory] = useState<string>("-1");
   const [code, setCode] = useState("");
   const [price, setPrice] = useState(0);
+  const [originalPrice, setOriginalPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<any>("");
@@ -55,6 +56,7 @@ export const useTambahBarangHooks = () => {
       setPrice(data.price);
       setQuantity(data.quantity);
       setDescription(data.description);
+      setOriginalPrice(data.original_price);
       setCategory(data.category_id);
       setLoading(false);
     } else {
@@ -72,6 +74,7 @@ export const useTambahBarangHooks = () => {
       quantity,
       description,
       category_id: category,
+      original_price: originalPrice,
     };
 
     if (
@@ -80,6 +83,7 @@ export const useTambahBarangHooks = () => {
       !price ||
       !quantity ||
       !description ||
+      !originalPrice ||
       !category ||
       !image
     ) {
@@ -119,6 +123,7 @@ export const useTambahBarangHooks = () => {
     setPrice(0);
     setQuantity(0);
     setDescription("");
+    setOriginalPrice(0);
     setCategory("");
     setImage("");
   };
@@ -128,6 +133,13 @@ export const useTambahBarangHooks = () => {
       return;
     }
     setPrice(Number(value));
+  };
+
+  const handleSetOriginalPrice = (value: string) => {
+    if (isNaN(Number(value))) {
+      return;
+    }
+    setOriginalPrice(Number(value));
   };
 
   const handleSetQuantity = (value: string) => {
@@ -149,6 +161,7 @@ export const useTambahBarangHooks = () => {
     description,
     isModalOpen,
     modalMessage,
+    originalPrice,
     setName,
     setImage,
     setCode,
@@ -162,5 +175,6 @@ export const useTambahBarangHooks = () => {
     setModalMessage,
     handleSetQuantity,
     handleCreateProduct,
+    handleSetOriginalPrice,
   };
 };

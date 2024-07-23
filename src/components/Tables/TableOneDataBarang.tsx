@@ -98,7 +98,7 @@ const TableOneDataBarang = ({
       </div>
 
       <div className="flex flex-col">
-        <div className="grid grid-cols-[1fr_1fr_1fr] rounded-sm border-y border-stroke dark:border-strokedark sm:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr]">
+        <div className="grid grid-cols-[1fr_1fr_1fr] rounded-sm border-y border-stroke dark:border-strokedark sm:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr]">
           <div className="flex justify-center  p-2.5 xl:p-5">
             <h5 className="text-sm font-medium xsm:text-base">Nama Produk</h5>
           </div>
@@ -109,7 +109,10 @@ const TableOneDataBarang = ({
             <h5 className="text-sm font-medium xsm:text-base">Kode Barang</h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium xsm:text-base">Harga</h5>
+            <h5 className="text-sm font-medium xsm:text-base">Harga Kulak</h5>
+          </div>
+          <div className="hidden p-2.5 text-center sm:block xl:p-5">
+            <h5 className="text-sm font-medium xsm:text-base">Harga Jual</h5>
           </div>
           <div className="p-2.5 text-center sm:block xl:p-5">
             <h5 className="text-sm font-medium xsm:text-base">Stok</h5>
@@ -122,7 +125,7 @@ const TableOneDataBarang = ({
         {data.length > 0 ? (
           data.map((data, key) => (
             <div
-              className={`grid grid-cols-[1fr_1fr_1fr] sm:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] ${
+              className={`grid grid-cols-[1fr_1fr_1fr] sm:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr] ${
                 key === brandData.length - 1
                   ? ""
                   : "border-b border-stroke dark:border-strokedark"
@@ -152,6 +155,15 @@ const TableOneDataBarang = ({
               <div className="flex items-center justify-center p-2.5 xl:p-5">
                 <p className="uppercase text-black dark:text-white">
                   {data.code}
+                </p>
+              </div>
+
+              <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                <p className="text-center text-black dark:text-white">
+                  Rp{" "}
+                  {Math.floor(data.original_price)
+                    .toLocaleString()
+                    .replace(/,/g, ".")}
                 </p>
               </div>
 
