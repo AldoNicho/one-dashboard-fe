@@ -48,21 +48,13 @@ const ECommerce: React.FC = () => {
         <DatePickerOne
           uniqueId="start-date"
           label="Tanggal awal"
-          value={new Date(startDate).toLocaleDateString("id-ID", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
+          value={new Date(startDate).toDateString()}
           onChange={handleStartDate}
         />
         <DatePickerOne
           uniqueId="end-date"
           label="Tanggal akhir"
-          value={new Date(endDate).toLocaleDateString("id-ID", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
+          value={new Date(endDate).toDateString()}
           onChange={handleEndDate}
         />
       </div>
@@ -91,7 +83,7 @@ const ECommerce: React.FC = () => {
           </svg>
         </CardDataStats>
         <CardDataStats
-          title="Total Profit"
+          title="Total Profit (Berdasarkan Tanggal)"
           total={`Rp ${salesProfitTotal.toLocaleString().replace(/,/g, ".")}`}
         >
           <svg
